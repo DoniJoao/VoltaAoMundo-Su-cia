@@ -18,7 +18,7 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="estilo.css" />
   </head>
   <body>
     <header class="header">
@@ -77,6 +77,42 @@
           alt="DestaqueSuecia2"
           width="520"
         />
+      </div>
+      <div class="container">
+        <h2>Por favor de sua sugestão de como podemos melhorar este site</h2>
+        <form action="$_POST">
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nome"
+              name="nome"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <label for="mensagem" class="form-label">Mensagem:</label>
+            <textarea
+              class="form-control"
+              id="mensagem"
+              name="mensagem"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+        </form>
+        <button class="btn btn-" type="submit" href="feedback.php" >Enviar</button>
       </div>
     </main>
     <footer class="footer">

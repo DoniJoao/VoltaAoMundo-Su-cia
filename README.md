@@ -12,5 +12,5 @@ Repositório destinado a guardar e comprovar progresso nas atividades de Desenvo
 6. Painel administrativo mostrando comentarios(consultar o BD)
 7. Modelar comentarios: aprovar ou reprovar (alterar o BD)
 8. importar comentarios via JSON*
-9. {c:green}Arquivo READme.md com explicação do projeto (github) {/c}
+9.  {c:green}Arquivo READme.md com explicação do projeto (github) {/c}
 10. Caracteristica extra a escolha do aluno

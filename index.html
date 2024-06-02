@@ -83,7 +83,7 @@
       </div>
       <div class="container">
         <h2>Por favor de sua sugestão de como podemos melhorar este site</h2>
-        <form action="$_POST">
+        <form action="comentario.php" method="post">
           <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input
@@ -104,10 +104,20 @@
               required
             ></textarea>
           </div>
-        </form>
+          <div class="mb-3">
+            <label for="nome" class="form-label">E-mail:</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              required
+            />
+          </div>
         <button class="btn btn-primary" type="submit" href="feedback.php">
           Enviar
         </button>
+        </form>
       </div>
       <br /><br />
     </main>

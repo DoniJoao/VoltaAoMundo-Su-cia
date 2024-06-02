@@ -1,3 +1,5 @@
+<?php  ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +21,8 @@
       <img src="imagens/bandeira-suecia.png" alt="Bandeira" width="200" />
       <h1>Suécia</h1>
       <h3>
-        Conheça as maravilhas culturais, Turisticas e gastronômicas da Suécia
+        Veja os Cometarios e avaliações do nosso site
       </h3>
-      <p>Por João Pedro Doni</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
@@ -36,24 +37,6 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Página Inicial</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="cultura.html">Cultura local</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="turisticos.html">Pontos turísticos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pratos.html">Pratos típicos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="informacoes.html">Informações</a>
-            </li>
-          </ul>
         </div>
       </div>
     </nav>

@@ -1,5 +1,10 @@
-<?php  ?>
+<?php
+require "classes/conexao.php";
 
+// Obtém uma conexão PDO
+$conexao = Conexao::getConnection();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +26,14 @@
       <img src="imagens/bandeira-suecia.png" alt="Bandeira" width="200" />
       <h1>Suécia</h1>
       <h3>
-        Veja os Cometarios e avaliações do nosso site
+        Veja os Comentarios e avaliações do nosso site
       </h3>
     </header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
+
+            
+
         <button
           class="navbar-toggler"
           type="button"

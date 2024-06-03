@@ -60,7 +60,7 @@
               <a class="nav-link" href="informacoes.html">Informações</a>
             </li>
             <li>
-              <a class="nav-link" href="administracao.php">Administração do Site</a>
+              <a class="nav-link" href="admin-autenticar.php">Administração do Site</a>
             </li>
           </ul>
         </div>
@@ -114,12 +114,42 @@
               required
             />
           </div>
-        <button class="btn btn-primary" type="submit" href="feedback.php">
+        <button class="btn btn-primary" type="submit" href="comentario.php">
           Enviar
         </button>
         </form>
       </div>
       <br /><br />
+      <div class="container" id="comentarios-container">
+        <h4>Avaliações anteriores</h4>
+          <script>
+            // Função para carregar os comentários
+            function carregarComentarios() {
+                fetch('carregar_comentarios.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Verifica se há algum comentário
+                        if (data.length > 0) {
+                            // Cria uma string HTML para os comentários
+                            let html = '<ul>';
+                            data.forEach(comentario => {
+                                html += `<li>${comentario.nome}: ${comentario.mensagem}</li>`;
+                            });
+                            html += '</ul>';
+                            // Insere os comentários na div especificada
+                            document.getElementById('comentarios-container').innerHTML = html;
+                        } else {
+                            // Caso não haja comentários
+                            document.getElementById('comentarios-container').innerHTML = 'Nenhum comentário disponível.';
+                        }
+                    })
+                    .catch(error => console.error('Erro ao carregar os comentários:', error));
+            }
+        
+            // Chama a função para carregar os comentários ao carregar a página
+            window.onload = carregarComentarios;
+        </script>
+    </div>
     </main>
     <footer class="footer">
       <p><strong>Projeto Volta ao Mundo - Suécia</strong></p>

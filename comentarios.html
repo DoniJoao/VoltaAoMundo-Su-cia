@@ -62,66 +62,57 @@
             <li>
               <a class="nav-link" href="comentarios.html">Comentarios</a>
             </li>
-            <li>
-              <a class="nav-link" href="admin/admin-autenticar.php">Administração do Site</a>
-            </li>
           </ul>
         </div>
       </div>
     </nav>
     <main>
-      <div class="conteudo">
-        <h2>Conheça a Suécia</h2>
-        <p></p>
-        <img
-          src="imagens/DestaqueSuecia.jpg"
-          alt="DestaqueSuecia"
-          width="532"
-        />
-        <img
-          src="imagens/DestqueSuecia2.jpg"
-          alt="DestaqueSuecia2"
-          width="520"
-        />
-      </div>
-      <div class="container">
-        <h2>Por favor de sua sugestão de como podemos melhorar este site</h2>
-        <form action="enviarComentario.php" method="post">
-          <div class="mb-3">
-            <label for="nome" class="form-label">Nome:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nome"
-              name="nome"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="mensagem" class="form-label">Mensagem:</label>
-            <textarea
-              class="form-control"
-              id="mensagem"
-              name="mensagem"
-              rows="4"
-              required
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="nome" class="form-label">E-mail:</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              required
-            />
-          </div>
-        <button class="btn btn-primary" type="submit">
-          Enviar
-        </button>
-        </form>
-      </div>
+        <div class="container mt-5">
+            <h1 class="mb-4">Comentários</h1>
+            <div id="comentarios-container"></div>
+        </div>
+    
+        <!-- Bootstrap JS (opcional, se você precisar de funcionalidades do Bootstrap JavaScript) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- JavaScript para carregar os comentários -->
+        <script>
+            // Carrega os comentários via AJAX
+            function carregarComentarios() {
+                fetch('exibirComentarios.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const comentariosContainer = document.getElementById('comentarios-container');
+                        if (data.error) {
+                            comentariosContainer.innerHTML = `<p>${data.error}</p>`;
+                        } else if (data.length > 0) {
+                            // Se houver comentários, cria elementos HTML para cada um e os adiciona ao contêiner
+                            data.forEach(comentario => {
+                                const comentarioHTML = `
+                                    <div class="card mb-3">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${comentario.nome}</h5>
+                                            <p class="card-text">${comentario.mensagem}</p>
+                                            <p class="card-text"><small class="text-muted">Email: ${comentario.email}</small></p>
+                                            <p class="card-text"><small class="text-muted">Data de Criação: ${comentario.data_criacao}</small></p>
+                                        </div>
+                                    </div>
+                                `;
+                                comentariosContainer.innerHTML += comentarioHTML;
+                            });
+                        } else {
+                            // Se não houver comentários, exibe uma mensagem
+                            comentariosContainer.innerHTML = '<p>Nenhum comentário encontrado.</p>';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao carregar os comentários:', error);
+                        document.getElementById('comentarios-container').innerHTML = '<p>Erro ao carregar os comentários.</p>';
+                    });
+            }
+    
+            // Chama a função para carregar os comentários quando a página carregar
+            window.onload = carregarComentarios;
+        </script>
       <br><br><br>
     </main>
     <footer class="footer">

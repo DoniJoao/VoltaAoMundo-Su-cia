@@ -1,12 +1,11 @@
 <?php
-require "Conexao.php";
+require_once "Conexao.php";
+
 
 // Obtém uma conexão PDO
 $conexao = Conexao::getConnection();
 
 // Agora você pode usar $conexao para executar consultas no banco de dados
-?>
-
 
 class Comentarios
 {
@@ -31,7 +30,7 @@ class Comentarios
     public function carregar()
     {
         $sql = "SELECT * FROM comentarios WHERE id=" . $this->id;
-        $conexao = Conexao::Connection();
+        $conexao = Conexao::getConnection();
         $resultado = $conexao->query($sql);
         $linha = $resultado->fetch();
 
@@ -48,7 +47,7 @@ class Comentarios
     public function listar()
     {
         $sql = "SELECT * FROM comentarios ORDER BY data_criacao";
-        $conexao = Conexao::Connection();
+        $conexao = Conexao::getConnection();
         $resultado = $conexao->query($sql);
         $lista = $resultado->fetchAll();
         return $lista;
@@ -61,7 +60,7 @@ class Comentarios
 
         // Atualiza o registro no banco de dados
         $sql = "UPDATE comentarios SET aprovado = :aprovado WHERE id = :id";
-        $conexao = Conexao::Connection();
+        $conexao = Conexao::getConnection();
         $stmt = $conexao->prepare($sql);
         $stmt->bindParam(':aprovado', $this->aprovado);
         $stmt->bindParam(':id', $this->id);
@@ -75,7 +74,7 @@ class Comentarios
 
         // Atualiza o registro no banco de dados
         $sql = "UPDATE comentarios SET aprovado = :aprovado WHERE id = :id";
-        $conexao = Conexao::Connection();
+        $conexao = Conexao::getConnection();
         $stmt = $conexao->prepare($sql);
         $stmt->bindParam(':aprovado', $this->aprovado);
         $stmt->bindParam(':id', $this->id);
@@ -86,8 +85,48 @@ class Comentarios
     public function excluir()
     {
         $sql = "DELETE FROM comentarios WHERE id=" . $this->id;
-        $conexao = Conexao::Connection();
+        $conexao = Conexao::getConnection();
         $conexao->exec($sql);
+    }
+
+    // Método para exibir os comentários aprovados
+    public function exibirComentarios()
+    {
+        try {
+            // Obtém a conexão com o banco de dados
+            $conexao = Conexao::getConnection();
+
+            // Consulta SQL para selecionar todos os comentários
+            $sql = "SELECT * FROM comentarios WHERE aprovado = 1 ORDER BY data_criacao DESC";
+            $stmt = $conexao->query($sql);
+
+            // Verifica se há comentários
+            if ($stmt->rowCount() > 0) {
+                // Retorna a lista de comentários
+                return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } else {
+                // Se não houver comentários, retorna um array vazio
+                return [];
+            }
+        } catch (PDOException $e) {
+            // Em caso de erro, lança uma exceção
+            throw new Exception('Erro ao exibir os comentários: ' . $e->getMessage());
+        }
+    }
+
+    // Método para enviar um novo comentário
+    public function enviar()
+    {
+        $sql = "INSERT INTO comentarios (nome, mensagem, email, data_criacao, aprovado) VALUES (:nome, :mensagem, :email, NOW(), :aprovado)";
+        $conexao = Conexao::getConnection();
+        $stmt = $conexao->prepare($sql);
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':mensagem', $this->mensagem);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':aprovado', $this->aprovado);
+        if (!$stmt->execute()) {
+            throw new Exception("Erro ao enviar comentário: " . implode(", ", $stmt->errorInfo()));
+        }
     }
 }
 ?>

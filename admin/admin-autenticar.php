@@ -43,18 +43,23 @@
       }
     </style>
   </head>
-  <body class="login-container">
-    <h1>Seja Bem-Vindo !</h1>
-    <form action="admin-login.php" method="POST">
-      <div class="mb-3">
-        <label for="nome">Nome de Usuario:</label>
-        <br>
-        <input type="text" name="nome" />
-        <label for="senha">Senha:</label>
-        <br>
-        <input type="password" name="senha">
-      </div>
-      <button type="submit" class="btn btn-primary btn-block">Logar</button>
-    </form>
+  <body>
+    <div class="login-container">
+      <h1 class="login-title">Seja Bem Vindo !</h1>
+      <form action="admin-login.php" method="POST">
+        <div class="mb-3">
+          <label for="nome">Nome de Usuario:</label>
+          <br>
+          <input type="text" name="nome" id="nome" required />
+        </div>
+        <div class="mb-3">
+          <label for="senha">Senha:</label>
+          <br>
+          <input type="password" name="senha" id="senha" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Logar</button>
+      </form>
+    </div>
   </body>
 </html>
+

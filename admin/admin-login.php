@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Tentar fazer login
         $usuario->login($nome, $senha);
         // Login bem-sucedido, redirecionar para a página principal do administrador
-        header("Location: ../index2.php");
+        header("Location: index2.php");
         exit;
     } catch (Exception $e) {
         // Exibir mensagem de erro

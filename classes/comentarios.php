@@ -89,6 +89,21 @@ class Comentarios
         $conexao->exec($sql);
     }
 
+    // Método para enviar um novo comentário
+    public function enviar()
+    {
+        $sql = "INSERT INTO comentarios (nome, mensagem, email, data_criacao, aprovado) VALUES (:nome, :mensagem, :email, NOW(), :aprovado)";
+        $conexao = Conexao::getConnection();
+        $stmt = $conexao->prepare($sql);
+        $stmt->bindParam(':nome', $this->nome);
+        $stmt->bindParam(':mensagem', $this->mensagem);
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':aprovado', $this->aprovado);
+        if (!$stmt->execute()) {
+            throw new Exception("Erro ao enviar comentário: " . implode(", ", $stmt->errorInfo()));
+        }
+    }
+
     // Método para exibir os comentários aprovados
     public function exibirComentarios()
     {
@@ -113,20 +128,17 @@ class Comentarios
             throw new Exception('Erro ao exibir os comentários: ' . $e->getMessage());
         }
     }
-
-    // Método para enviar um novo comentário
-    public function enviar()
+    
+    public function carregarcomentariosemjson()
     {
-        $sql = "INSERT INTO comentarios (nome, mensagem, email, data_criacao, aprovado) VALUES (:nome, :mensagem, :email, NOW(), :aprovado)";
-        $conexao = Conexao::getConnection();
-        $stmt = $conexao->prepare($sql);
-        $stmt->bindParam(':nome', $this->nome);
-        $stmt->bindParam(':mensagem', $this->mensagem);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':aprovado', $this->aprovado);
-        if (!$stmt->execute()) {
-            throw new Exception("Erro ao enviar comentário: " . implode(", ", $stmt->errorInfo()));
-        }
+        $comentarios = new Comentarios();
+
+        // Obter todos os comentários
+        $comentariosLista = $comentarios->exibirComentarios();
+
+        // Retornar os comentários como JSON
+        header('Content-Type: application/json');
+        echo json_encode($comentariosLista);
     }
 }
 ?>

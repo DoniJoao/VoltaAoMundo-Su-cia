@@ -1,6 +1,5 @@
 <?php
 
-require_once "Conexao.php";
 class Usuario
 {
     private $conexao;
@@ -8,21 +7,6 @@ class Usuario
     public function __construct($conexao)
     {
         $this->conexao = $conexao;
-    }
-
-    public function cadastrar($nome, $senha)
-    {
-        // Verifica se o usuário já existe
-        if ($this->existeUsuario($nome)) {
-            throw new Exception("Nome de usuário já está em uso.");
-        }
-
-        // Insere o novo usuário no banco de dados
-        $sql = "INSERT INTO usuarios (nome, senha) VALUES (:nome, :senha)";
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->bindParam(':nome', $nome);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->execute();
     }
 
     public function login($nome, $senha)
@@ -58,5 +42,4 @@ class Usuario
         return $count > 0;
     }
 }
-
 ?>

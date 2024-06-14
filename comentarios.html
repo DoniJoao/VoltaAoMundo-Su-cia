@@ -73,43 +73,52 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- JavaScript para carregar os comentários -->
         <script>
-            // Carrega os comentários via AJAX
-            function carregarComentarios() {
-                fetch('exibirComentarios.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        const comentariosContainer = document.getElementById('comentarios-container');
-                        if (data.error) {
-                            comentariosContainer.innerHTML = `<p>${data.error}</p>`;
-                        } else if (data.length > 0) {
-                            // Se houver comentários, cria elementos HTML para cada um e os adiciona ao contêiner
-                            data.forEach(comentario => {
-                                const comentarioHTML = `
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <h5 class="card-title">${comentario.nome}</h5>
-                                            <p class="card-text">${comentario.mensagem}</p>
-                                            <p class="card-text"><small class="text-muted">Email: ${comentario.email}</small></p>
-                                            <p class="card-text"><small class="text-muted">Data de Criação: ${comentario.data_criacao}</small></p>
-                                        </div>
-                                    </div>
-                                `;
-                                comentariosContainer.innerHTML += comentarioHTML;
-                            });
-                        } else {
-                            // Se não houver comentários, exibe uma mensagem
-                            comentariosContainer.innerHTML = '<p>Nenhum comentário encontrado.</p>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro ao carregar os comentários:', error);
-                        document.getElementById('comentarios-container').innerHTML = '<p>Erro ao carregar os comentários.</p>';
-                    });
-            }
-    
-            // Chama a função para carregar os comentários quando a página carregar
-            window.onload = carregarComentarios;
-        </script>
+          // Carrega os comentários via AJAX
+          function carregarComentarios() {
+              fetch('exibirComentarios.php')
+                  .then(response => {
+                      if (!response.ok) {
+                          throw new Error('Erro ao carregar os comentários.');
+                      }
+                      return response.json();
+                  })
+                  .then(data => {
+                      const comentariosContainer = document.getElementById('comentarios-container');
+                      
+                      if (data.error) {
+                          comentariosContainer.innerHTML = `<p>${data.error}</p>`;
+                      } else if (data.length > 0) {
+                          // Limpa o container antes de adicionar novos comentários
+                          comentariosContainer.innerHTML = '';
+                          
+                          // Cria elementos HTML para cada comentário
+                          data.forEach(comentario => {
+                              const comentarioHTML = `
+                                  <div class="card mb-3">
+                                      <div class="card-body">
+                                          <h5 class="card-title">${comentario.nome}</h5>
+                                          <p class="card-text">${comentario.mensagem}</p>
+                                          <p class="card-text"><small class="text-muted">Email: ${comentario.email}</small></p>
+                                          <p class="card-text"><small class="text-muted">Data de Criação: ${comentario.data_criacao}</small></p>
+                                      </div>
+                                  </div>
+                              `;
+                              comentariosContainer.innerHTML += comentarioHTML;
+                          });
+                      } else {
+                          comentariosContainer.innerHTML = '<p>Nenhum comentário encontrado.</p>';
+                      }
+                  })
+                  .catch(error => {
+                      console.error('Erro ao carregar os comentários:', error);
+                      document.getElementById('comentarios-container').innerHTML = '<p>Erro ao carregar os comentários.</p>';
+                  });
+          }
+      
+          // Chama a função para carregar os comentários quando a página carregar
+          window.onload = carregarComentarios;
+      </script>
+      
       <br><br><br>
     </main>
     <footer class="footer">

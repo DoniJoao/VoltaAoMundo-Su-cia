@@ -34,11 +34,19 @@ class Comentarios
     }
 
     public function exibirComentariosAprovados()
-    {
-        $sql = "SELECT * FROM comentarios WHERE aprovado = 1";
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
+{
+    $sql = "SELECT * FROM comentarios WHERE aprovado = 1";
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->execute();
+    $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Convertendo os resultados em uma string JSON
+    $json = json_encode($resultados);
+
+    // Salvando o JSON em um arquivo
+    file_put_contents('comentarios.json', $json);
+
+    return $json;
+}
 }
 ?>

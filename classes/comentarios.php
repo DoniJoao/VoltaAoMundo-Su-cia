@@ -1,33 +1,24 @@
 <?php
-require_once "Conexao.php";
 class Comentarios
 {
     private $conexao;
 
-    public function __construct()
+    public function __construct($conexao)
     {
-        $this->conexao = Conexao::getConnection();
+        $this->conexao = $conexao;
     }
 
-    public function exibirComentarios()
+    public function obterTodos()
     {
-        $sql = "SELECT * FROM comentarios";
+        $sql = "SELECT * FROM comentarios ORDER BY data_criacao DESC";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function aprovarComentario($id)
+    public function aprovar($id)
     {
         $sql = "UPDATE comentarios SET aprovado = 1 WHERE id = :id";
-        $stmt = $this->conexao->prepare($sql);
-        $stmt->bindParam(':id', $id);
-        $stmt->execute();
-    }
-
-    public function reprovarComentario($id)
-    {
-        $sql = "UPDATE comentarios SET aprovado = 0 WHERE id = :id";
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -40,10 +31,8 @@ class Comentarios
     $stmt->execute();
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Convertendo os resultados em uma string JSON
     $json = json_encode($resultados);
 
-    // Salvando o JSON em um arquivo
     file_put_contents('comentarios.json', $json);
 
     return $json;

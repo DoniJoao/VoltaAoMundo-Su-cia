@@ -3,7 +3,7 @@ require_once "../classes/usuarios.php";
 require_once "../classes/conexao.php"; // Certifique-se de incluir o arquivo de conexão
 
 // Criar uma instância da classe Usuario passando a conexão como parâmetro
-$usuario = new Usuario(Conexao::getConnection());
+$usuario = new Usuarios(Conexao::getConnection());
 
 // Processar o formulário de login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

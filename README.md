@@ -9,8 +9,8 @@ Repositório destinado a guardar e comprovar progresso nas atividades de Desenvo
 3. Proteção contra SQL Injection -feito
 4. Cadastrar novo usuario com senha criptografada
 5. Pagina "Envie um comentario"(gravar no BD) -feito
-6. Painel administrativo mostrando comentarios(consultar o BD)
-7. Modelar comentarios: aprovar ou reprovar (alterar o BD)
-8. importar comentarios via JSON*
+6. Painel administrativo mostrando comentarios(consultar o BD) -feito
+7. Modelar comentarios: aprovar ou reprovar (alterar o BD) -feito
+8. importar comentarios via JSON* -feito
 9. Arquivo READme.md com explicação do projeto (github)-feito
 10. Caracteristica extra a escolha do aluno

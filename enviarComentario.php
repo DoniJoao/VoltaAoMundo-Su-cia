@@ -5,8 +5,7 @@ error_reporting(E_ALL);
 
 try {
     // Inclui a conexão com o banco de dados e a classe Comentarios
-    include_once "/classes/Conexao.php";
-    include_once "/classes/Comentarios.php";
+    include "classes/comentarios.php";
 
     // Captura e sanitiza os dados do formulário
     $nome = isset($_POST["nome"]) ? htmlspecialchars($_POST["nome"], ENT_QUOTES, 'UTF-8') : null;
@@ -26,7 +25,7 @@ try {
     $comentario->aprovado = 0; // Define como não aprovado inicialmente
 
     // Envia o comentário para o banco de dados
-    $comentario->enviar();
+    $comentario->enviarComentarios();
 
     echo "<h3>Comentário enviado com sucesso! Obrigado pela colaboração.</h3>";
     echo "<a href='index.html'>Voltar para a Página Inicial</a>";

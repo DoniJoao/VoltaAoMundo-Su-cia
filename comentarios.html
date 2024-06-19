@@ -21,11 +21,11 @@
     <link rel="stylesheet" href="estilo.css" />
   </head>
   <body>
-    <header class="header">
-      <img src="imagens/bandeira-suecia.png" alt="Bandeira" width="200" />
+    <header class="header text-center py-3">
+      <img src="imagens/bandeira-suecia.png" alt="Bandeira" width="200" class="img-fluid" />
       <h1>Suécia</h1>
       <h3>
-        Conheça as maravilhas culturais, Turisticas e gastronômicas da Suécia
+        Conheça as maravilhas culturais, turísticas e gastronômicas da Suécia
       </h3>
       <p>Por João Pedro Doni</p>
     </header>
@@ -59,69 +59,24 @@
             <li class="nav-item">
               <a class="nav-link" href="informacoes.html">Informações</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="comentarios.html">Comentários</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="admin/login.html">Administração do Site</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
     <main>
-        <div class="container mt-5">
-            <h1 class="mb-4">Comentários</h1>
-            <div id="comentarios-container"></div>
-        </div>
-    
-        <!-- Bootstrap JS (opcional, se você precisar de funcionalidades do Bootstrap JavaScript) -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- JavaScript para carregar os comentários -->
-        <script>
-            // Carrega os comentários via AJAX
-            function carregarComentarios() {
-                fetch('exibirComentarios.php')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Erro ao carregar os comentários.');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        const comentariosContainer = document.getElementById('comentarios-container');
-                        
-                        if (data.error) {
-                            comentariosContainer.innerHTML = `<p>${data.error}</p>`;
-                        } else if (data.length > 0) {
-                            // Limpa o container antes de adicionar novos comentários
-                            comentariosContainer.innerHTML = '';
-                            
-                            // Cria elementos HTML para cada comentário
-                            data.forEach(comentario => {
-                                const comentarioHTML = `
-                                    <div class="card mb-3">
-                                        <div class="card-body">
-                                            <h5 class="card-title">${comentario.nome}</h5>
-                                            <p class="card-text">${comentario.mensagem}</p>
-                                            <p class="card-text"><small class="text-muted">Email: ${comentario.email}</small></p>
-                                            <p class="card-text"><small class="text-muted">Data de Criação: ${comentario.data_criacao}</small></p>
-                                        </div>
-                                    </div>
-                                `;
-                                comentariosContainer.innerHTML += comentarioHTML;
-                            });
-                        } else {
-                            comentariosContainer.innerHTML = '<p>Nenhum comentário encontrado.</p>';
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro ao carregar os comentários:', error);
-                        document.getElementById('comentarios-container').innerHTML = '<p>Erro ao carregar os comentários.</p>';
-                    });
-            }
-      
-            // Chama a função para carregar os comentários quando a página carregar
-            window.onload = carregarComentarios;
-        </script>
-      
-      <br><br><br>
+      <div class="container mt-5">
+        <h1 class="mb-4">Comentários</h1>
+        <div id="comentarios-container"></div>
+      </div>
+      <br /><br /><br />
     </main>
-    <footer class="footer">
+    <footer class="footer text-center py-3">
       <p><strong>Projeto Volta ao Mundo - Suécia</strong></p>
     </footer>
     <script
@@ -129,5 +84,51 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script>
+      // Carrega os comentários via AJAX
+      function carregarComentarios() {
+        fetch('exibirComentarios.php')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Erro ao carregar os comentários.');
+            }
+            return response.json();
+          })
+          .then(data => {
+            const comentariosContainer = document.getElementById('comentarios-container');
+
+            if (data.error) {
+              comentariosContainer.innerHTML = `<p>${data.error}</p>`;
+            } else if (data.length > 0) {
+              // Limpa o container antes de adicionar novos comentários
+              comentariosContainer.innerHTML = '';
+
+              // Cria elementos HTML para cada comentário
+              data.forEach(comentario => {
+                const comentarioHTML = `
+                  <div class="card mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title">${comentario.nome}</h5>
+                      <p class="card-text">${comentario.mensagem}</p>
+                      <p class="card-text"><small class="text-muted">Email: ${comentario.email}</small></p>
+                      <p class="card-text"><small class="text-muted">Data de Criação: ${comentario.data_criacao}</small></p>
+                    </div>
+                  </div>
+                `;
+                comentariosContainer.innerHTML += comentarioHTML;
+              });
+            } else {
+              comentariosContainer.innerHTML = '<p>Nenhum comentário encontrado.</p>';
+            }
+          })
+          .catch(error => {
+            console.error('Erro ao carregar os comentários:', error);
+            document.getElementById('comentarios-container').innerHTML = '<p>Erro ao carregar os comentários.</p>';
+          });
+      }
+
+      // Chama a função para carregar os comentários quando a página carregar
+      window.onload = carregarComentarios;
+    </script>
   </body>
 </html>

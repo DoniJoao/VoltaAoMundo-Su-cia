@@ -18,15 +18,12 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="estilo.css" />
   </head>
   <body>
-    <header class="header">
-      <img src="imagens/bandeira-suecia.png" alt="Bandeira" width="200" />
+    <header class="header text-center py-3">
+      <img src="imagens/bandeira-suecia.png" alt="Bandeira" width="200" class="img-fluid" />
       <h1>Suécia</h1>
-      <h3>
-        Conheça as maravilhas culturais, Turisticas e gastronômicas da Suécia
-      </h3>
+      <h3>Conheça as maravilhas culturais, turísticas e gastronômicas da Suécia</h3>
       <p>Por João Pedro Doni</p>
     </header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -59,72 +56,50 @@
             <li class="nav-item">
               <a class="nav-link" href="informacoes.html">Informações</a>
             </li>
-            <li>
-              <a class="nav-link" href="comentarios.html">Comentarios</a>
+            <li class="nav-item">
+              <a class="nav-link" href="comentarios.html">Comentários</a>
             </li>
-            <li>
-              <a class="nav-link" href="admin/login.html">Administração do Site</a>
+            <li class="nav-item">
+              <a class="nav-link" href="admin/admin-login.php">Administração do Site</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
     <main>
-      <div class="conteudo">
+      <div class="container mt-4">
         <h2>Conheça a Suécia</h2>
         <p></p>
-        <img
-          src="imagens/DestaqueSuecia.jpg"
-          alt="DestaqueSuecia"
-          width="532"
-        />
-        <img
-          src="imagens/DestqueSuecia2.jpg"
-          alt="DestaqueSuecia2"
-          width="520"
-        />
+        <div class="row">
+          <div class="col-md-6">
+            <img src="imagens/DestaqueSuecia.jpg" alt="DestaqueSuecia" class="img-fluid" />
+          </div>
+          <div class="col-md-6">
+            <img src="imagens/DestqueSuecia2.jpg" alt="DestaqueSuecia2" class="img-fluid" />
+          </div>
+        </div>
       </div>
-      <div class="container">
-        <h2>Por favor de sua sugestão de como podemos melhorar este site</h2>
+      <div class="container mt-4">
+        <h2>Por favor, dê sua sugestão de como podemos melhorar este site</h2>
         <form action="enviarComentario.php" method="post">
           <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nome"
-              name="nome"
-              required
-            />
+            <input type="text" class="form-control" id="nome" name="nome" required />
           </div>
           <div class="mb-3">
             <label for="mensagem" class="form-label">Mensagem:</label>
-            <textarea
-              class="form-control"
-              id="mensagem"
-              name="mensagem"
-              rows="4"
-              required
-            ></textarea>
+            <textarea class="form-control" id="mensagem" name="mensagem" rows="4" required></textarea>
           </div>
           <div class="mb-3">
-            <label for="nome" class="form-label">E-mail:</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              required
-            />
+            <label for="email" class="form-label">E-mail:</label>
+            <input type="email" class="form-control" id="email" name="email" required />
           </div>
-        <button class="btn btn-primary" type="submit">
-          Enviar
-        </button>
+          <button class="btn btn-primary" type="submit">Enviar</button>
         </form>
       </div>
-      <br><br><br>
+      <br /><br /><br />
     </main>
-    <footer class="footer">
+    <footer class="footer text-center py-3">
       <p><strong>Projeto Volta ao Mundo - Suécia</strong></p>
     </footer>
     <script

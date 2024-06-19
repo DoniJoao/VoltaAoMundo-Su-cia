@@ -1,7 +1,10 @@
-<?php 
+<?php
 session_start();
-session_unset();
+
+// Finaliza a sessão
 session_destroy();
-header('Location: index.html');
-exit;
+
+// Redireciona para a página de login
+header("Location: login.html");
+exit();
 ?>

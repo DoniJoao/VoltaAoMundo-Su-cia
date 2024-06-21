@@ -5,15 +5,16 @@
 # Orientação para continuidade do Projeto
 #### Otimizar e melhorar o projeto iniciado no bimestre anterior e deve incluir
 
-- [x] **Design Completo**
-- [x] **Sistema de Autenticação**
-- [x] **Proteção contra SQL Injection**
-- [x] **Cadastrar Novo Usuário com Senha Criptografada**
-- [x] **Página "Envie um Comentário" (Gravar no BD)**
-- [x] **Painel Administrativo Mostrando Comentários (Consultar o BD)**
-- [x] **Modelar Comentários: Aprovar ou Reprovar (Alterar o BD)**
-- [x] **Importar Comentários via JSON (fiz o inverso)**
-- [x] **Arquivo README.md com Explicação do Projeto (GitHub)**
+- [x] **1-Design Completo**
+- [x] **2-Sistema de Autenticação**
+- [x] **3-Proteção contra SQL Injection**
+- [x] **4-Cadastrar Novo Usuário com Senha Criptografada**
+- [x] **5-Página "Envie um Comentário" (Gravar no BD)**
+- [x] **6-Painel Administrativo Mostrando Comentários (Consultar o BD)**
+- [x] **7-Modelar Comentários: Aprovar ou Reprovar (Alterar o BD)**
+- [x] **8-Importar Comentários via JSON (fiz o inverso)**
+- [x] **9-Arquivo README.md com Explicação do Projeto (GitHub)**
+- [x]  **10-Caracteristica extra a escolha do aluno** 
 
 ### 🛠️ Tecnologias Utilizadas
 

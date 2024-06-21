@@ -1,81 +1,83 @@
 <?php
 class Usuario
 {
-  public $nome;
-  public $senha;
+    public $nome;
+    public $senha;
+    private $conexao;
 
-  public function __construct($id = false)
-  {
-    if ($id) {
-      $this->id = $id;
-      $this->carregar();
+    public function __construct($conexao, $id = false)
+    {
+        $this->conexao = $conexao;
+        if ($id) {
+            $this->id = $id;
+            $this->carregar();
+        }
     }
-  }
 
-  public function inserir()
-  {
-    include "conexao.php";
+    public function inserir()
+    {
+        $sql = "INSERT INTO usuarios (nome, senha) VALUES (:nome, :senha)";
 
-    $sql = "INSERT INTO usuarios (nome, senha) VALUES (:nome, :senha)";
+        $resultado = $this->conexao->prepare($sql);
+        $resultado->bindParam(':nome', $this->nome);
+        $resultado->bindParam(':senha', $this->senha);
+        $resultado->execute();
+    }
 
-    $resultado = $conexao->prepare($sql);
-    $resultado->bindParam(':nome', $this->nome);
-    $resultado->bindParam(':senha', $this->senha);
-    $resultado->execute();
-  }
+    public function login()
+    {
+        $senha = hash("sha256", $this->senha);
 
-  public function login()
-  {
-    include "classes/conexao.php";
+        $sql = "SELECT * FROM usuarios WHERE nome = :nome AND senha = :senha";
 
-    $senha = hash("sha256", $this->senha);
+        $resultado = $this->conexao->prepare($sql);
+        $resultado->bindParam(':nome', $this->nome);
+        $resultado->bindParam(':senha', $senha);
+        $resultado->execute();
 
-    $sql = "SELECT * FROM usuarios
-        WHERE nome = :nome
-        AND senha = :senha";
+        $linha = $resultado->fetch(PDO::FETCH_ASSOC);
+        if ($linha) {
+            $this->nome = $linha['nome'];
+            $this->senha = $linha['senha'];
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-    $resultado = $conexao->prepare($sql);
-    $resultado->bindParam(':nome', $this->nome);
-    $resultado->bindParam(':senha', $senha);
-    $linha = $resultado->execute();
+    public function excluir()
+    {
+        $sql = "DELETE FROM usuarios WHERE id = :id";
 
-    $linha = $resultado->fetch();
-    $this->email = $linha['nome'];
-    $this->senha = $linha['senha'];
-  }
+        $resultado = $this->conexao->prepare($sql);
+        $resultado->bindParam(':id', $this->id);
+        $resultado->execute();
+    }
 
-  public function excluir()
-  {
-    $sql = "DELETE FROM usuarios WHERE id=" . $this->id;
+    public function carregar()
+    {
+        $sql = "SELECT * FROM usuarios WHERE id = :id";
 
-    include "conexao.php";
+        $resultado = $this->conexao->prepare($sql);
+        $resultado->bindParam(':id', $this->id);
+        $resultado->execute();
 
-    $conexao->exec($sql);
-  }
+        $linha = $resultado->fetch(PDO::FETCH_ASSOC);
 
-  public function carregar()
-  {
-    $sql = "SELECT * FROM usuarios WHERE id=" . $this->id;
-    include "conexao.php";
+        $this->nome = $linha['nome'];
+        $this->senha = $linha['senha'];
+    }
 
-    $resultado = $conexao->query($sql);
-    $linha = $resultado->fetch();
+    private function contarUsuarios()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM usuarios";
 
-    $this->email = $linha['nome'];
-    $this->senha = $linha['senha'];
-  }
+        $resultado = $this->conexao->prepare($sql);
+        $resultado->execute();
 
-  private function contarUsuarios()
-  {
-    include "classes/conexao.php";
+        $linha = $resultado->fetch(PDO::FETCH_ASSOC);
 
-    $sql = "SELECT COUNT(*) AS total FROM usuarios";
-
-    $resultado = $conexao->prepare($sql);
-    $resultado->execute();
-
-    $linha = $resultado->fetch(PDO::FETCH_ASSOC);
-
-    return $linha['total'];
-  }
+        return $linha['total'];
+    }
 }
+?>

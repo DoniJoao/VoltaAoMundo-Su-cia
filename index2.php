@@ -63,10 +63,10 @@ $result = $conn->query($sql);
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="../index.html">Página Inicial</a>
+              <a class="nav-link" href="index.html">Página Inicial</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="admin-inserir.php">Inserir Novo Admin</a>
+              <a class="nav-link" href="#">Inserir Novo Admin</a>
             </li>
           </ul>
         </div>
@@ -115,7 +115,11 @@ $result = $conn->query($sql);
         </table>
     </div>
 
-    
+    <div class="admin-container">
+        <form action="backupComentarios.php" method="post" style="text-align: right;">
+            <button type="submit">Fazer Backup dos Comentários Aprovados</button>
+        </form>
+    </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
 </body>

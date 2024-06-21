@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Tempo de geração: 19/06/2024 às 02:03
+-- Tempo de geração: 21/06/2024 às 23:30
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -48,7 +48,9 @@ INSERT INTO `comentarios` (`id`, `nome`, `mensagem`, `email`, `data_criacao`, `a
 (5, 'joao paulo', 'vai dar 18 horas doido', 'briante@gmail.com', '2024-06-02 22:46:18', 1),
 (6, 'juninho', '10 pras 6 manow', 'goncalves@gmail.com', '2024-06-02 22:51:38', 1),
 (7, 'juninho', '10 pras 6 manow', 'goncalves@gmail.com', '2024-06-02 22:52:27', 1),
-(8, 'hfhfg', 'fhfghfgh', 'gfhgfhfg@gmail.com', '2024-06-15 17:31:30', 0);
+(8, 'hfhfg', 'fhfghfgh', 'gfhgfhfg@gmail.com', '2024-06-15 17:31:30', 0),
+(9, 'luis', 'muito bom voce vai conseguir', 'luis@luis.com', '2024-06-18 21:16:34', 1),
+(10, 'zé', 'testando comentario de zé', 'ze@gmail.com', '2024-06-18 21:42:15', 1);
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,7 @@ INSERT INTO `comentarios` (`id`, `nome`, `mensagem`, `email`, `data_criacao`, `a
 CREATE TABLE `usuarios` (
   `id` int(10) NOT NULL,
   `nome` varchar(20) NOT NULL,
-  `senha` varchar(20) NOT NULL
+  `senha` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -67,7 +69,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `senha`) VALUES
-(3, 'admin', 'admin');
+(3, 'admin', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+(4, 'joao', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4');
 
 --
 -- Índices para tabelas despejadas
@@ -93,13 +96,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -58,5 +58,37 @@ class Comentarios {
             throw new Exception('Erro ao buscar comentários aprovados: ' . $e->getMessage());
         }
     }
+
+    public function exibirTodosComentarios() {
+        try {
+            $query = "SELECT nome, mensagem, email, data_criacao, aprovado FROM comentarios";
+            $stmt = $this->conexao->query($query);
+            $comentarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $comentarios;
+        } catch (PDOException $e) {
+            throw new Exception('Erro ao buscar todos os comentários: ' . $e->getMessage());
+        }
+    }
+
+    public function salvarComentariosBackupJSON($filename = 'comentariosBackup.json') {
+        try {
+            $comentarios = $this->exibirTodosComentarios();
+
+            if ($comentarios) {
+                $json_data = json_encode($comentarios, JSON_PRETTY_PRINT);
+
+                if (file_put_contents($filename, $json_data)) {
+                    return true;
+                } else {
+                    throw new Exception('Falha ao salvar o arquivo JSON.');
+                }
+            } else {
+                throw new Exception('Não há comentários para backup.');
+            }
+        } catch (Exception $e) {
+            throw new Exception('Erro ao realizar o backup de comentários: ' . $e->getMessage());
+        }
+    }
+
 }
 ?>

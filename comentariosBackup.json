@@ -68,5 +68,19 @@
         "email": "ze@gmail.com",
         "data_criacao": "2024-06-18 21:42:15",
         "aprovado": 1
+    },
+    {
+        "nome": "teste",
+        "mensagem": "teste final antes de mostrar ao professor junior",
+        "email": "teste@teste.com",
+        "data_criacao": "2024-06-24 19:23:11",
+        "aprovado": 1
+    },
+    {
+        "nome": "z\u00e9",
+        "mensagem": "testando comentario do z\u00e9",
+        "email": "ze@gmail.com",
+        "data_criacao": "2024-06-24 19:28:49",
+        "aprovado": 1
     }
 ]
